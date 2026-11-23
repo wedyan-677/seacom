@@ -1,0 +1,559 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>أسرار أعماق البحار — رحلة من الفكرة إلى الإطلاق</title>
+  <meta name="description" content="تجربة سينمائية من ثمانية فصول تروي رحلة إنشاء موقع «أسرار أعماق البحار»: من الشرارة الأولى حتى لحظة الإطلاق.">
+  <meta name="theme-color" content="#020d17">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:title" content="أسرار أعماق البحار — رحلتنا إلى الأعماق تبدأ الآن!">
+  <meta property="og:description" content="ثمانية فصول... وغوصة واحدة من الفكرة إلى الإطلاق.">
+  <meta property="og:image" content="assets/images/slide-01.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preload" href="assets/fonts/alexandria-arabic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/aref-ruqaa-700-arabic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="assets/images/slide-01.jpg">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js', 'is-loading');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main-story">انتقل إلى المحتوى</a>
+
+  <div class="ocean-base" aria-hidden="true">
+    <div class="ocean-glow ocean-glow--one"></div>
+    <div class="ocean-glow ocean-glow--two"></div>
+    <div class="ocean-grid"></div>
+    <div class="ocean-grain"></div>
+  </div>
+
+  <canvas id="ocean-canvas" class="ocean-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-aura" id="cursor-aura" aria-hidden="true"></div>
+
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-orbit">
+      <span></span>
+      <svg viewBox="0 0 48 48" role="presentation">
+        <path d="M13 23c0-7.5 5-12.5 11-12.5S35 15.5 35 23c-2.3 1.8-4.5-.4-6.8 0s-3 2.2-5.2.9c-2-1.2-3.2-.3-4.8.5-1.8.8-3.2-.6-3.2-1.4Z" fill="currentColor"/>
+        <path d="M17 25c-.6 5.2-2.5 6.8-.8 10M24 25v11M31 25c.8 4.6 2.7 6.6.9 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="preloader-text">نغوص في الأعماق<span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span></p>
+    <div class="preloader-track"><span></span></div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#slide-1" aria-label="أسرار أعماق البحار — العودة إلى البداية">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" role="presentation">
+          <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-opacity=".24"/>
+          <circle cx="24" cy="24" r="16.5" fill="none" stroke="currentColor" stroke-opacity=".12" stroke-dasharray="1 4"/>
+          <path d="M13 23c0-7.5 5-12.5 11-12.5S35 15.5 35 23c-2.3 1.8-4.5-.4-6.8 0s-3 2.2-5.2.9c-2-1.2-3.2-.3-4.8.5-1.8.8-3.2-.6-3.2-1.4Z" fill="currentColor"/>
+          <path d="M17 25c-.6 5.2-2.5 6.8-.8 10M24 25v11M31 25c.8 4.6 2.7 6.6.9 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-opacity=".85"/>
+          <circle cx="24" cy="17.5" r="2" fill="#fff" fill-opacity=".9"/>
+        </svg>
+      </span>
+      <span class="brand-copy">
+        <span class="brand-title">أسرار أعماق البحار</span>
+        <span class="brand-sub">رحلة بناء رقمية</span>
+      </span>
+    </a>
+
+    <div class="header-center" aria-hidden="true">
+      <span></span>
+      <p>من الفكرة إلى الإطلاق</p>
+      <span></span>
+    </div>
+
+    <button class="chapters-toggle" id="chapters-toggle" type="button" aria-expanded="false" aria-controls="chapter-menu" aria-label="فتح فهرس الرحلة">
+      <span class="chapters-toggle-label">فهرس الرحلة</span>
+      <span class="chapters-toggle-icon" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </span>
+    </button>
+  </header>
+
+  <div class="chapter-menu" id="chapter-menu" aria-hidden="true">
+    <div class="chapter-backdrop" data-close-menu></div>
+    <section class="chapter-panel" role="dialog" aria-modal="true" aria-labelledby="chapter-menu-title" inert>
+      <div class="chapter-panel-head">
+        <div>
+          <p class="kicker">خريطة الرحلة</p>
+          <h2 id="chapter-menu-title">فهرس الفصول</h2>
+          <p class="chapter-panel-intro">ثمانية فصول... وغوصة واحدة نحو الإطلاق.</p>
+        </div>
+        <button class="icon-button close-menu" id="close-menu" type="button" aria-label="إغلاق فهرس الرحلة">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <ol class="chapter-list">
+        <li>
+          <button class="chapter-link is-current" type="button" data-go="0" aria-current="true">
+            <span class="chapter-link-no">٠١</span>
+            <span class="chapter-link-copy"><strong>الفكرة</strong><small>حيث تولد الشرارة</small></span>
+            <span class="chapter-link-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></span>
+          </button>
+        </li>
+        <li>
+          <button class="chapter-link" type="button" data-go="1">
+            <span class="chapter-link-no">٠٢</span>
+            <span class="chapter-link-copy"><strong>البحث والاستكشاف</strong><small>نقرأ التيارات الخفية</small></span>
+            <span class="chapter-link-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></span>
+          </button>
+        </li>
+        <li>
+          <button class="chapter-link" type="button" data-go="2">
+            <span class="chapter-link-no">٠٣</span>
+            <span class="chapter-link-copy"><strong>التخطيط</strong><small>نرسم المسار قبل الغوص</small></span>
+            <span class="chapter-link-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></span>
+          </button>
+        </li>
+        <li>
+          <button class="chapter-link" type="button" data-go="3">
+            <span class="chapter-link-no">٠٤</span>
+            <span class="chapter-link-copy"><strong>التصميم</strong><small>نمنح الحلم وهجاً</small></span>
+            <span class="chapter-link-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></span>
+          </button>
+        </li>
+        <li>
+          <button class="chapter-link" type="button" data-go="4">
+            <span class="chapter-link-no">٠٥</span>
+            <span class="chapter-link-copy"><strong>التطوير</strong><small>نبني عالماً تحت السطح</small></span>
+            <span class="chapter-link-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></span>
+          </button>
+        </li>
+        <li>
+          <button class="chapter-link" type="button" data-go="5">
+            <span class="chapter-link-no">٠٦</span>
+            <span class="chapter-link-copy"><strong>المحتوى</strong><small>نروي الحكاية</small></span>
+            <span class="chapter-link-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></span>
+          </button>
+        </li>
+        <li>
+          <button class="chapter-link" type="button" data-go="6">
+            <span class="chapter-link-no">٠٧</span>
+            <span class="chapter-link-copy"><strong>الاختبار والتحسين</strong><small>نصقل التفاصيل</small></span>
+            <span class="chapter-link-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></span>
+          </button>
+        </li>
+        <li>
+          <button class="chapter-link" type="button" data-go="7">
+            <span class="chapter-link-no">٠٨</span>
+            <span class="chapter-link-copy"><strong>الإطلاق</strong><small>نبدأ الرحلة</small></span>
+            <span class="chapter-link-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></span>
+          </button>
+        </li>
+      </ol>
+
+      <div class="chapter-panel-foot">
+        <span>من الفكرة إلى الإطلاق</span>
+        <div class="panel-dots" id="panel-dots" aria-hidden="true">
+          <i class="is-active"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <main class="story" id="main-story" data-direction="next">
+    <article class="slide slide--1" id="slide-1" data-chapter="الفكرة" data-accent="#67ebda" aria-labelledby="slide-title-1">
+      <div class="slide-bg" aria-hidden="true">
+        <div class="slide-media" style="--image:url('assets/images/slide-01.jpg'); --position:50% 48%;"></div>
+        <div class="slide-beams"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-vignette"></div>
+      </div>
+
+      <div class="slide-layout">
+        <div class="slide-copy">
+          <p class="eyebrow reveal" style="--i:0">
+            <span class="eyebrow-index">٠١</span>
+            <span class="eyebrow-line"></span>
+            <span>الفصل الأول · الفكرة</span>
+          </p>
+          <h1 class="slide-title reveal" id="slide-title-1" style="--i:1"><span>كلّ رحلةٍ تبدأ</span> <em>بشرارة.</em></h1>
+          <p class="slide-lead reveal" style="--i:2">في ظلام الأعماق، لا تحتاج البداية إلى أكثر من ضوء صغير... وفكرة تؤمن بها.</p>
+          <ul class="slide-tags reveal" style="--i:3" aria-label="ركائز المرحلة">
+            <li>الرؤية</li>
+            <li>الشغف</li>
+            <li>الوعد</li>
+          </ul>
+          <div class="slide-deliverable reveal" style="--i:4">
+            <span class="deliverable-label">المخرج</span>
+            <span class="deliverable-text">بيان الفكرة، والوعد الأساسي الذي نصنع من أجله.</span>
+          </div>
+        </div>
+
+        <aside class="slide-aside" aria-hidden="true">
+          <span class="aside-depth">٠ م</span>
+          <span class="aside-gauge"><i></i></span>
+          <span class="aside-word">البداية</span>
+          <span class="aside-index">٠١</span>
+        </aside>
+      </div>
+    </article>
+
+    <article class="slide slide--2" id="slide-2" data-chapter="البحث والاستكشاف" data-accent="#74d9ff" aria-labelledby="slide-title-2" aria-hidden="true" inert>
+      <div class="slide-bg" aria-hidden="true">
+        <div class="slide-media" style="--image:url('assets/images/slide-02.jpg'); --position:42% 50%;"></div>
+        <div class="slide-beams"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-vignette"></div>
+      </div>
+
+      <div class="slide-layout">
+        <div class="slide-copy">
+          <p class="eyebrow reveal" style="--i:0">
+            <span class="eyebrow-index">٠٢</span>
+            <span class="eyebrow-line"></span>
+            <span>الفصل الثاني · البحث</span>
+          </p>
+          <h2 class="slide-title reveal" id="slide-title-2" style="--i:1"><span>نغوص حيث</span> <em>لا يصل الضوء.</em></h2>
+          <p class="slide-lead reveal" style="--i:2">نستكشف السوق والجمهور والتيارات الخفية، لنعود بخريطة دقيقة قبل أن نتحرك.</p>
+          <ul class="slide-tags reveal" style="--i:3" aria-label="ركائز المرحلة">
+            <li>بحث السوق</li>
+            <li>تحليل الجمهور</li>
+            <li>استكشاف الفرص</li>
+          </ul>
+          <div class="slide-deliverable reveal" style="--i:4">
+            <span class="deliverable-label">المخرج</span>
+            <span class="deliverable-text">رؤى موثوقة توجّه كل قرار قادم.</span>
+          </div>
+        </div>
+
+        <aside class="slide-aside" aria-hidden="true">
+          <span class="aside-depth">٢٠٠ م</span>
+          <span class="aside-gauge"><i></i></span>
+          <span class="aside-word">الاستكشاف</span>
+          <span class="aside-index">٠٢</span>
+        </aside>
+      </div>
+    </article>
+
+    <article class="slide slide--3" id="slide-3" data-chapter="التخطيط" data-accent="#85f2e1" aria-labelledby="slide-title-3" aria-hidden="true" inert>
+      <div class="slide-bg" aria-hidden="true">
+        <div class="slide-media" style="--image:url('assets/images/slide-03.jpg'); --position:50% 50%;"></div>
+        <div class="slide-beams"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-vignette"></div>
+      </div>
+
+      <div class="scene-art scene-art--map" aria-hidden="true">
+        <svg viewBox="0 0 520 440" fill="none">
+          <g stroke="currentColor" stroke-width="1" opacity=".38">
+            <path d="M-20 105C72 70 118 134 196 112s108-73 196-38 110 9 165-20" stroke-dasharray="3 7"/>
+            <path d="M-10 218c102-41 136 45 220 12s122-77 204-36 92 22 134-8"/>
+            <path d="M25 354c76-54 137-12 210-44s116-54 199-23 87 28 123 8" stroke-dasharray="2 8"/>
+          </g>
+          <g fill="currentColor">
+            <circle cx="138" cy="98" r="3.5"/><circle cx="294" cy="79" r="2.5"/><circle cx="405" cy="132" r="4"/>
+            <circle cx="165" cy="246" r="3"/><circle cx="342" cy="211" r="4.5"/><circle cx="472" cy="219" r="2.5"/>
+            <circle cx="225" cy="326" r="3.5"/><circle cx="389" cy="306" r="2.5"/>
+          </g>
+          <g stroke="currentColor" opacity=".28">
+            <circle cx="342" cy="211" r="17" stroke-dasharray="2 5"/>
+            <circle cx="342" cy="211" r="31" stroke-dasharray="1 8"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="slide-layout">
+        <div class="slide-copy">
+          <p class="eyebrow reveal" style="--i:0">
+            <span class="eyebrow-index">٠٣</span>
+            <span class="eyebrow-line"></span>
+            <span>الفصل الثالث · التخطيط</span>
+          </p>
+          <h2 class="slide-title reveal" id="slide-title-3" style="--i:1"><span>نرسم الخريطة</span> <em>قبل الغوص.</em></h2>
+          <p class="slide-lead reveal" style="--i:2">أهداف واضحة، أولويات محسوبة، وخط زمني ينساب بلا مفاجآت.</p>
+          <ul class="slide-tags reveal" style="--i:3" aria-label="ركائز المرحلة">
+            <li>الأهداف</li>
+            <li>المسار</li>
+            <li>الجدول الزمني</li>
+          </ul>
+          <div class="slide-deliverable reveal" style="--i:4">
+            <span class="deliverable-label">المخرج</span>
+            <span class="deliverable-text">خطة تنفيذ واضحة وقابلة للقياس.</span>
+          </div>
+        </div>
+
+        <aside class="slide-aside" aria-hidden="true">
+          <span class="aside-depth">٨٠٠ م</span>
+          <span class="aside-gauge"><i></i></span>
+          <span class="aside-word">التخطيط</span>
+          <span class="aside-index">٠٣</span>
+        </aside>
+      </div>
+    </article>
+
+    <article class="slide slide--4" id="slide-4" data-chapter="التصميم" data-accent="#9adfff" aria-labelledby="slide-title-4" aria-hidden="true" inert>
+      <div class="slide-bg" aria-hidden="true">
+        <div class="slide-media" style="--image:url('assets/images/slide-04.jpg'); --position:46% 50%;"></div>
+        <div class="slide-beams"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-vignette"></div>
+      </div>
+
+      <div class="slide-layout">
+        <div class="slide-copy">
+          <p class="eyebrow reveal" style="--i:0">
+            <span class="eyebrow-index">٠٤</span>
+            <span class="eyebrow-line"></span>
+            <span>الفصل الرابع · التصميم</span>
+          </p>
+          <h2 class="slide-title reveal" id="slide-title-4" style="--i:1"><span>نمنح الحلم</span> <em>وهجاً.</em></h2>
+          <p class="slide-lead reveal" style="--i:2">هوية تتنفس، وواجهة تنساب كالماء، وتجربة تبقى في الذاكرة.</p>
+          <ul class="slide-tags reveal" style="--i:3" aria-label="ركائز المرحلة">
+            <li>الهوية البصرية</li>
+            <li>واجهة المستخدم</li>
+            <li>تجربة سلسة</li>
+          </ul>
+          <div class="slide-deliverable reveal" style="--i:4">
+            <span class="deliverable-label">المخرج</span>
+            <span class="deliverable-text">نظام بصري متكامل وتجربة استخدام سهلة.</span>
+          </div>
+        </div>
+
+        <aside class="slide-aside" aria-hidden="true">
+          <span class="aside-depth">١٤٠٠ م</span>
+          <span class="aside-gauge"><i></i></span>
+          <span class="aside-word">التصميم</span>
+          <span class="aside-index">٠٤</span>
+        </aside>
+      </div>
+    </article>
+
+    <article class="slide slide--5" id="slide-5" data-chapter="التطوير" data-accent="#65e9d4" aria-labelledby="slide-title-5" aria-hidden="true" inert>
+      <div class="slide-bg" aria-hidden="true">
+        <div class="slide-media" style="--image:url('assets/images/slide-05.jpg'); --position:58% 50%;"></div>
+        <div class="slide-beams"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-vignette"></div>
+      </div>
+
+      <div class="scene-art scene-art--grid" aria-hidden="true">
+        <div class="grid-plane"></div>
+        <span class="grid-node grid-node--a"></span>
+        <span class="grid-node grid-node--b"></span>
+        <span class="grid-node grid-node--c"></span>
+        <span class="grid-line grid-line--a"></span>
+        <span class="grid-line grid-line--b"></span>
+      </div>
+
+      <div class="slide-layout">
+        <div class="slide-copy">
+          <p class="eyebrow reveal" style="--i:0">
+            <span class="eyebrow-index">٠٥</span>
+            <span class="eyebrow-line"></span>
+            <span>الفصل الخامس · التطوير</span>
+          </p>
+          <h2 class="slide-title reveal" id="slide-title-5" style="--i:1"><span>نبني عالماً</span> <em>تحت السطح.</em></h2>
+          <p class="slide-lead reveal" style="--i:2">أكواد نظيفة، أداء خفيف، وتفاصيل تعمل بسلاسة على كل شاشة.</p>
+          <ul class="slide-tags reveal" style="--i:3" aria-label="ركائز المرحلة">
+            <li>الواجهة</li>
+            <li>البرمجة</li>
+            <li>الأداء</li>
+          </ul>
+          <div class="slide-deliverable reveal" style="--i:4">
+            <span class="deliverable-label">المخرج</span>
+            <span class="deliverable-text">موقع سريع، آمن، وجاهز للنمو.</span>
+          </div>
+        </div>
+
+        <aside class="slide-aside" aria-hidden="true">
+          <span class="aside-depth">٢٤٠٠ م</span>
+          <span class="aside-gauge"><i></i></span>
+          <span class="aside-word">التطوير</span>
+          <span class="aside-index">٠٥</span>
+        </aside>
+      </div>
+    </article>
+
+    <article class="slide slide--6" id="slide-6" data-chapter="المحتوى" data-accent="#8ddbff" aria-labelledby="slide-title-6" aria-hidden="true" inert>
+      <div class="slide-bg" aria-hidden="true">
+        <div class="slide-media" style="--image:url('assets/images/slide-06.jpg'); --position:43% 50%;"></div>
+        <div class="slide-beams"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-vignette"></div>
+      </div>
+
+      <div class="slide-layout">
+        <div class="slide-copy">
+          <p class="eyebrow reveal" style="--i:0">
+            <span class="eyebrow-index">٠٦</span>
+            <span class="eyebrow-line"></span>
+            <span>الفصل السادس · المحتوى</span>
+          </p>
+          <h2 class="slide-title reveal" id="slide-title-6" style="--i:1"><span>نضع روحاً</span> <em>في كل حكاية.</em></h2>
+          <p class="slide-lead reveal" style="--i:2">كلمات تلمس، صور تروي، وقصة تجعل الزائر يريد البقاء أطول.</p>
+          <ul class="slide-tags reveal" style="--i:3" aria-label="ركائز المرحلة">
+            <li>المحتوى</li>
+            <li>السرد</li>
+            <li>الأصول البصرية</li>
+          </ul>
+          <div class="slide-deliverable reveal" style="--i:4">
+            <span class="deliverable-label">المخرج</span>
+            <span class="deliverable-text">محتوى متماسك بصوت وهوية واضحة.</span>
+          </div>
+        </div>
+
+        <aside class="slide-aside" aria-hidden="true">
+          <span class="aside-depth">٣٦٠٠ م</span>
+          <span class="aside-gauge"><i></i></span>
+          <span class="aside-word">المحتوى</span>
+          <span class="aside-index">٠٦</span>
+        </aside>
+      </div>
+    </article>
+
+    <article class="slide slide--7" id="slide-7" data-chapter="الاختبار والتحسين" data-accent="#a0f8ec" aria-labelledby="slide-title-7" aria-hidden="true" inert>
+      <div class="slide-bg" aria-hidden="true">
+        <div class="slide-media" style="--image:url('assets/images/slide-07.jpg'); --position:46% 52%;"></div>
+        <div class="slide-beams"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-vignette"></div>
+      </div>
+
+      <div class="scene-art scene-art--scan" aria-hidden="true">
+        <span class="scan-ring"></span>
+        <span class="scan-ring scan-ring--inner"></span>
+        <span class="scan-cross"></span>
+      </div>
+
+      <div class="slide-layout">
+        <div class="slide-copy">
+          <p class="eyebrow reveal" style="--i:0">
+            <span class="eyebrow-index">٠٧</span>
+            <span class="eyebrow-line"></span>
+            <span>الفصل السابع · الاختبار</span>
+          </p>
+          <h2 class="slide-title reveal" id="slide-title-7" style="--i:1"><span>نصقل الجوهرة</span> <em>قبل الظهور.</em></h2>
+          <p class="slide-lead reveal" style="--i:2">نختبر كل تفصيل، نسدّ الفجوات، ونضبط الإيقاع حتى يصبح كل شيء طبيعياً.</p>
+          <ul class="slide-tags reveal" style="--i:3" aria-label="ركائز المرحلة">
+            <li>الاختبار</li>
+            <li>تحسين التجربة</li>
+            <li>التوافق</li>
+          </ul>
+          <div class="slide-deliverable reveal" style="--i:4">
+            <span class="deliverable-label">المخرج</span>
+            <span class="deliverable-text">تجربة موثوقة على كل الأجهزة.</span>
+          </div>
+        </div>
+
+        <aside class="slide-aside" aria-hidden="true">
+          <span class="aside-depth">٥٢٠٠ م</span>
+          <span class="aside-gauge"><i></i></span>
+          <span class="aside-word">الاختبار</span>
+          <span class="aside-index">٠٧</span>
+        </aside>
+      </div>
+    </article>
+
+    <article class="slide slide--final is-active" id="slide-8" data-chapter="الإطلاق" data-accent="#a4fff0" aria-labelledby="slide-title-8">
+      <div class="slide-bg" aria-hidden="true">
+        <div class="slide-media" style="--image:url('assets/images/slide-08.jpg'); --position:50% 46%;"></div>
+        <div class="slide-beams"></div>
+        <div class="final-glow"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-vignette"></div>
+      </div>
+
+      <div class="final-orbit" aria-hidden="true">
+        <span class="orbit orbit--one"></span>
+        <span class="orbit orbit--two"></span>
+        <span class="orbit orbit--three"></span>
+        <span class="orbit-core"></span>
+      </div>
+
+      <div class="slide-layout slide-layout--final">
+        <div class="slide-copy slide-copy--final">
+          <p class="eyebrow eyebrow--center reveal" style="--i:0">
+            <span class="eyebrow-index">٠٨</span>
+            <span class="eyebrow-line"></span>
+            <span>الفصل الثامن · الإطلاق</span>
+          </p>
+          <h2 class="slide-title slide-title--final reveal" id="slide-title-8" style="--i:1">رحلتنا إلى الأعماق<br><em>تبدأ الآن!</em></h2>
+          <p class="slide-lead slide-lead--final reveal" style="--i:2">اكتملت الحكاية... فبدأ أثرها. الموقع جاهز، والضوء ينتظر أول زائر.</p>
+          <div class="final-actions reveal" style="--i:3">
+            <button class="primary-button" id="restart-journey" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+              <span>ابدأ الرحلة من جديد</span>
+            </button>
+            <button class="ghost-button" id="share-journey" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2M14 11a5 5 0 0 0-7.1-.1l-2 2A5 5 0 0 0 12 20l1.2-1.2"/></svg>
+              <span>شارك الرحلة</span>
+            </button>
+          </div>
+          <p class="final-signature reveal" style="--i:4">ثمانية فصول · رؤية واحدة · أثر يمتد</p>
+        </div>
+
+        <aside class="slide-aside slide-aside--final" aria-hidden="true">
+          <span class="aside-depth">٦٠٠٠ م</span>
+          <span class="aside-gauge"><i></i></span>
+          <span class="aside-word">الإطلاق</span>
+          <span class="aside-index">٠٨</span>
+        </aside>
+      </div>
+    </article>
+  </main>
+
+  <footer class="story-dock">
+    <div class="dock-progress">
+      <div class="dock-counter" aria-label="الشريحة الحالية">
+        <span class="counter-current" id="current-number">٠١</span>
+        <span class="counter-divider">/</span>
+        <span class="counter-total">٠٨</span>
+      </div>
+      <div class="dock-progress-copy">
+        <span class="dock-chapter" id="current-chapter">الفكرة</span>
+        <span class="progress-track"><span id="progress-bar"></span></span>
+      </div>
+    </div>
+
+    <nav class="dock-dots" id="dock-dots" aria-label="التنقل السريع بين الفصول">
+      <button class="dock-dot is-active" type="button" data-go="0" aria-label="الفصل الأول: الفكرة" aria-current="step"><span></span></button>
+      <button class="dock-dot" type="button" data-go="1" aria-label="الفصل الثاني: البحث والاستكشاف"><span></span></button>
+      <button class="dock-dot" type="button" data-go="2" aria-label="الفصل الثالث: التخطيط"><span></span></button>
+      <button class="dock-dot" type="button" data-go="3" aria-label="الفصل الرابع: التصميم"><span></span></button>
+      <button class="dock-dot" type="button" data-go="4" aria-label="الفصل الخامس: التطوير"><span></span></button>
+      <button class="dock-dot" type="button" data-go="5" aria-label="الفصل السادس: المحتوى"><span></span></button>
+      <button class="dock-dot" type="button" data-go="6" aria-label="الفصل السابع: الاختبار والتحسين"><span></span></button>
+      <button class="dock-dot" type="button" data-go="7" aria-label="الفصل الثامن: الإطلاق"><span></span></button>
+    </nav>
+
+    <div class="dock-nav">
+      <button class="nav-button nav-button--prev" id="prev-button" type="button" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        <span>السابق</span>
+      </button>
+      <button class="nav-button nav-button--next" id="next-button" type="button">
+        <span>التالي</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <div class="swipe-hint" aria-hidden="true">
+    <span class="swipe-line"></span>
+    <p>اسحب للاستكشاف</p>
+  </div>
+
+  <p class="sr-only" id="slide-announcer" aria-live="polite"></p>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <style>
+      .preloader, .swipe-hint, .story-dock, .chapter-menu, .chapters-toggle { display: none !important; }
+      html, body { overflow: auto !important; }
+      .slide { position: relative !important; opacity: 1 !important; visibility: visible !important; min-height: 100svh; }
+      .slide-copy { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
+

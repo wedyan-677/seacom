@@ -1,0 +1,24 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><style>html,body{margin:0;background:#000;overflow:hidden}iframe{display:block;width:1440px;height:900px;border:0}</style></head>
+<body>
+<iframe id="app" src="http://localhost:4173/#slide-8" title="final slide"></iframe>
+<script>
+  const variants = {
+    v4: '.slide-title--final em{padding-top:0.6em!important;line-height:1.4!important}',
+    v5: '.slide-title--final em{-webkit-background-clip:border-box!important;background-clip:border-box!important;background:none!important;-webkit-text-fill-color:#67ebda!important;color:#67ebda!important}',
+    v6: '.slide-title--final{text-shadow:none!important}.slide-title--final em{filter:none!important;animation:none!important}'
+  };
+  const v = new URLSearchParams(location.search).get('v') || 'v4';
+  const frame = document.getElementById('app');
+  frame.addEventListener('load', () => {
+    setTimeout(() => {
+      const doc = frame.contentDocument;
+      const style = doc.createElement('style');
+      style.textContent = '.slide{transition:none!important}.slide.is-active{opacity:1!important;visibility:visible!important}.slide .slide-media{animation:none!important}' + variants[v];
+      doc.head.appendChild(style);
+    }, 900);
+  });
+</script>
+</body>
+</html>

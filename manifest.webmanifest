@@ -1,0 +1,21 @@
+{
+  "name": "أسرار أعماق البحار",
+  "short_name": "أعماق البحار",
+  "description": "رحلة سينمائية من ثمانية فصول من الفكرة إلى الإطلاق.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#01080f",
+  "theme_color": "#020d17",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
